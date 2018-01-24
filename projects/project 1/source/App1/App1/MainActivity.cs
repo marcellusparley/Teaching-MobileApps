@@ -2,15 +2,13 @@
 using Android.Widget;
 using Android.OS;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace App1
 {
-    [Activity(Label = "App1", MainLauncher = true, Icon = "@mipmap/icon")]
+    [Activity(Label = "Postfix Calculator", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -20,17 +18,50 @@ namespace App1
 
             // Get our button from the layout resource,
             // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.myButton);
             Button buttonCalc = FindViewById<Button>(Resource.Id.buttonCalculate);
+            Button buttonEnter = FindViewById<Button>(Resource.Id.buttonNumEnter);
+            Button buttonPlus = FindViewById<Button>(Resource.Id.buttonPlus);
+            Button buttonMinus = FindViewById<Button>(Resource.Id.buttonMinus);
+            Button buttonTimes = FindViewById<Button>(Resource.Id.buttonTimes);
+            Button buttonDiv = FindViewById<Button>(Resource.Id.buttonDivide);
+            Button buttonClear = FindViewById<Button>(Resource.Id.buttonClear);
 
             buttonCalc.Click += CalcTextField;
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+            buttonEnter.Click += EnterInputNumber;
+            buttonPlus.Click += AddSymbol;
+            buttonMinus.Click += AddSymbol;
+            buttonTimes.Click += AddSymbol;
+            buttonDiv.Click += AddSymbol;
+            buttonClear.Click += ClearTextField;
+        }
+
+        private void ClearTextField(object sender, EventArgs e)
+        {
+            TextView t = FindViewById<TextView>(Resource.Id.calcTextField);
+            t.Text = "";
+        }
+
+        private void AddSymbol(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            TextView t = FindViewById<TextView>(Resource.Id.calcTextField);
+            t.Text += b.Text + " ";
+
+        }
+
+        private void EnterInputNumber(object sender, EventArgs e)
+        {
+            TextView textField = FindViewById<TextView>(Resource.Id.calcTextField);
+            EditText numberField = FindViewById<EditText>(Resource.Id.numberInputField);
+            textField.Text += numberField.Text + " ";
+            numberField.Text = "";
         }
 
         private void CalcTextField(object sender, EventArgs e)
         {
-            EditText textField = FindViewById<EditText>(Resource.Id.calcTextField);
-            Stack calcStack = new Stack();
+            TextView textField = FindViewById<TextView>(Resource.Id.calcTextField);
+            EditText numberField = FindViewById<EditText>(Resource.Id.numberInputField);
+            Stack<double> calcStack = new Stack<double>();
             char opSymbol;
             double temp, result = 0.0;
             string[] items = textField.Text.Split(' ');
@@ -47,23 +78,23 @@ namespace App1
                     switch (item)
                     {
                         case "+":
-                            temp = (double)calcStack.Pop();
-                            result = temp + (double)calcStack.Pop();
+                            temp = calcStack.Pop();
+                            result = temp + calcStack.Pop();
                             calcStack.Push(result);
                             break;
                         case "-":
-                            temp = (double)calcStack.Pop();
-                            result = (double)calcStack.Pop() - temp;
+                            temp = calcStack.Pop();
+                            result = calcStack.Pop() - temp;
                             calcStack.Push(result);
                             break;
                         case "*":
-                            temp = (double)calcStack.Pop();
-                            result = (double)calcStack.Pop() * temp;
+                            temp = calcStack.Pop();
+                            result = calcStack.Pop() * temp;
                             calcStack.Push(result);
                             break;
                         case "/":
-                            temp = (double)calcStack.Pop();
-                            result = (double)calcStack.Pop() / temp;
+                            temp = calcStack.Pop();
+                            result = calcStack.Pop() / temp;
                             calcStack.Push(result);
                             break;
                         default:
@@ -75,8 +106,9 @@ namespace App1
 
             if (calcStack.Count == 1)
             {
-                result = (double)calcStack.Pop();
-                textField.Text = result.ToString();
+                result = calcStack.Pop();
+                numberField.Text = result.ToString();
+                textField.Text = "";
             }
             else
             {
