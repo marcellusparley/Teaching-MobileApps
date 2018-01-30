@@ -15,4 +15,4 @@ To enter an operation just hit one of the four operation buttons: +, -, *, /.
 
 The clear button will reset the calculation field to a blank state.
 
-Also note that since this is a postfix calculator you want to have at least two operands preceding your operation symbol or else it will not calculate anything. In this situation the calculation field will display 'Something went wrong!' which you can clear away and try again.
+Also note that since this is a postfix calculator you want to have at least two numbers preceding your operation or else it will not calculate anything. In this situation the calculation field will display 'Something went wrong!' which you can clear away and try again.
