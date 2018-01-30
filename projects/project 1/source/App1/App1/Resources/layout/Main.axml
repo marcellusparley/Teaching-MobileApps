@@ -22,11 +22,12 @@
             android:id="@+id/buttonClear" />
     </LinearLayout>
     <TextView
-        android:text="3 4 +"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/calcTextField" />
+        android:id="@+id/calcTextField"
+        android:backgroundTint="#ffb4b4b4"
+        android:text="3 4 + " />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -38,8 +39,10 @@
             android:layout_weight="0.333"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Input numbers here..."
-            android:layout_marginRight="0.0dp" />
+            android:layout_marginRight="0.0dp"
+            android:maxLines="1"
+            android:lines="1"
+            android:hint="Input numbers here..." />
         <Button
             android:text="Enter"
             android:id="@+id/buttonNumEnter"

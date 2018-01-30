@@ -16,8 +16,7 @@ namespace App1
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            // Get our button from the layout resource,
-            // and attach an event to it
+            // Getting buttons
             Button buttonCalc = FindViewById<Button>(Resource.Id.buttonCalculate);
             Button buttonEnter = FindViewById<Button>(Resource.Id.buttonNumEnter);
             Button buttonPlus = FindViewById<Button>(Resource.Id.buttonPlus);
@@ -26,6 +25,7 @@ namespace App1
             Button buttonDiv = FindViewById<Button>(Resource.Id.buttonDivide);
             Button buttonClear = FindViewById<Button>(Resource.Id.buttonClear);
 
+            // assigning functions to be called
             buttonCalc.Click += CalcTextField;
             buttonEnter.Click += EnterInputNumber;
             buttonPlus.Click += AddSymbol;
@@ -33,6 +33,7 @@ namespace App1
             buttonTimes.Click += AddSymbol;
             buttonDiv.Click += AddSymbol;
             buttonClear.Click += ClearTextField;
+            
         }
 
         private void ClearTextField(object sender, EventArgs e)
@@ -41,6 +42,8 @@ namespace App1
             t.Text = "";
         }
 
+        // AddSymbol retrieves the sender's Text field and appends to calcTextField
+        // used for all the operation buttons
         private void AddSymbol(object sender, EventArgs e)
         {
             Button b = sender as Button;
@@ -49,6 +52,8 @@ namespace App1
 
         }
 
+        // EnterInputNumber takes and clears the input from the numberInputField and
+        // appends it to the calcTextField
         private void EnterInputNumber(object sender, EventArgs e)
         {
             TextView textField = FindViewById<TextView>(Resource.Id.calcTextField);
@@ -57,6 +62,7 @@ namespace App1
             numberField.Text = "";
         }
 
+        // CalcTextField holds the main logic for the postfix calculator
         private void CalcTextField(object sender, EventArgs e)
         {
             TextView textField = FindViewById<TextView>(Resource.Id.calcTextField);
@@ -68,6 +74,8 @@ namespace App1
 
             foreach (string item in items)
             {
+                // If item is a double push it to stack else it is an operation so
+                // handle the math
                 if (double.TryParse(item, out temp))
                 {
                     calcStack.Push(temp);
@@ -75,6 +83,7 @@ namespace App1
                 else if (calcStack.Count >= 2)
                 {
                     char.TryParse(item, out opSymbol);
+
                     switch (item)
                     {
                         case "+":
@@ -82,28 +91,33 @@ namespace App1
                             result = temp + calcStack.Pop();
                             calcStack.Push(result);
                             break;
+
                         case "-":
                             temp = calcStack.Pop();
                             result = calcStack.Pop() - temp;
                             calcStack.Push(result);
                             break;
+
                         case "*":
                             temp = calcStack.Pop();
                             result = calcStack.Pop() * temp;
                             calcStack.Push(result);
                             break;
+
                         case "/":
                             temp = calcStack.Pop();
                             result = calcStack.Pop() / temp;
                             calcStack.Push(result);
                             break;
+
                         default:
                             break;
                     }
-                    
                 }
             }
 
+            // At the end should be only the answer left in the stack
+            // if not something went wrong
             if (calcStack.Count == 1)
             {
                 result = calcStack.Pop();
@@ -114,8 +128,6 @@ namespace App1
             {
                 textField.Text = "Something went wrong!";
             }
-
-            //throw new NotImplementedException();
         }
     }
 }
