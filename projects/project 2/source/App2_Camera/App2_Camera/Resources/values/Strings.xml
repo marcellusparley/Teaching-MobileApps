@@ -2,4 +2,16 @@
 <resources>
   <string name="hello">Hello World, Click Me!</string>
   <string name="app_name">App2_Camera</string>
+  <string name="effects_prompt">Select Effect...</string>
+  <string-array name="effects_array">
+    <item>Remove Red</item>
+    <item>Remove Green</item>
+    <item>Remove Blue</item>
+    <item>Negate Red</item>
+    <item>Negate Green</item>
+    <item>Negate Blue</item>
+    <item>Grayscale</item>
+    <item>High Contrast</item>
+    <item>Add Noise</item>
+  </string-array>
 </resources>

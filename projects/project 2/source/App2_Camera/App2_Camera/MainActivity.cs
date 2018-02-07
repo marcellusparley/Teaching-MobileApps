@@ -96,15 +96,19 @@ namespace App2_Camera
             SendBroadcast(mediaScanIntent);
             */
 
+            var editIntent = new Intent(this, typeof(EditActivity));
+            editIntent.PutExtra("data", (Android.Graphics.Bitmap)data.Extras.Get("data"));
+            StartActivity(editIntent);
+
             // Display in ImageView. We will resize the bitmap to fit the display.
             // Loading the full sized image will consume too much memory
             // and cause the application to crash.
-            ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
+            /*ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
             int height = Resources.DisplayMetrics.HeightPixels;
-            int width = imageView.Height;
+            int width = imageView.Height;*/
 
             //AC: workaround for not passing actual files
-            Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
+            //Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
             //Android.Graphics.Bitmap copyBitmap =
             // bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
 

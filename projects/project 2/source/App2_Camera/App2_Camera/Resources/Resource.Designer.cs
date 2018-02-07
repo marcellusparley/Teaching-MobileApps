@@ -44,11 +44,11 @@ namespace App2_Camera
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int launchCameraButton = 2131034112;
-			
 			// aapt resource value: 0x7f050001
-			public const int takenPictureImageView = 2131034113;
+			public const int launchCameraButton = 2131034113;
+			
+			// aapt resource value: 0x7f050000
+			public const int takenPictureImageView = 2131034112;
 			
 			static Id()
 			{
@@ -64,7 +64,10 @@ namespace App2_Camera
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int Edit = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int Main = 2130903041;
 			
 			static Layout()
 			{

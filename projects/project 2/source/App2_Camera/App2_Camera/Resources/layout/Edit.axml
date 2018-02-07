@@ -3,9 +3,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:id="@+id/launchCameraButton"
+    <ImageView
+        android:visibility="visible"
+        android:layout_width="fill_parent"
+        android:layout_height="300.0dp"
+        android:id="@+id/takenPictureImageView"
+        android:adjustViewBounds="true" />
+    <Spinner
+        android:prompt="@string/effect_prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Open Camera" />
+        android:id="@+id/spinner1" />
 </LinearLayout>
