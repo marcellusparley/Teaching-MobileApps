@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Marcellus Parley
+//msp261
+//cs480 mobile apps - pa2
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

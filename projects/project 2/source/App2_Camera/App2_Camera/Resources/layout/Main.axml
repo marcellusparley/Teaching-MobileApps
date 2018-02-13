@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:text="Open Camera" />
     <Button
-        android:text="Image Gallary"
+        android:text="Image Gallery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/openGallaryButton" />
