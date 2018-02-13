@@ -6,25 +6,49 @@
     <ImageView
         android:visibility="visible"
         android:layout_width="fill_parent"
-        android:layout_height="300.0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.333"
         android:id="@+id/takenPictureImageView"
         android:adjustViewBounds="true" />
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/effectsBar">
-        <Spinner
-            android:prompt="@string/effects_prompt"
-            android:layout_weight="0.333"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/effectSpinner" />
-        <Button
-            android:text="Apply"
-            android:layout_weight="1"
-            android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/buttonHolder">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/applyButton" />
+            android:id="@+id/effectsBar">
+            <Spinner
+                android:prompt="@string/effects_prompt"
+                android:layout_weight="0.333"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/effectSpinner" />
+            <Button
+                android:text="Apply"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/applyButton" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonBar">
+            <Button
+                android:text="Return"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/buttonReturn" />
+            <Button
+                android:text="Save"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/buttonSave" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

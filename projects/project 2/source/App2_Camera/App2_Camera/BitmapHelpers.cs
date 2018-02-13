@@ -155,6 +155,8 @@ namespace App2_Camera
                     Color c = new Color(p);
                     int avg = (c.G + c.R + c.B) / 3;
                     c.G = (byte)avg;
+                    c.R = (byte)avg;
+                    c.B = (byte)avg;
                     copyBitmap.SetPixel(i, j, c);
                 }
 
