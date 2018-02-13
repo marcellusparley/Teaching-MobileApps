@@ -30,6 +30,10 @@ namespace App2_Camera
             //getting the bitmap from the intent
             Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)Intent.Extras.Get("data");
 
+            // Getting button and effects spinner
+            //Button buttonApply = FindViewById<Button>(Resource.Id.applyButton);
+            //Spinner effectSelect = FindViewById<Spinner>(Resource.Id.effectSpinner);
+
             Android.Graphics.Bitmap copyBitmap = BitmapHelpers.RemoveRed(bitmap);
             if (copyBitmap != null)
             {

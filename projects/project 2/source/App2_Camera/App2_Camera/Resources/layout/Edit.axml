@@ -9,9 +9,22 @@
         android:layout_height="300.0dp"
         android:id="@+id/takenPictureImageView"
         android:adjustViewBounds="true" />
-    <Spinner
-        android:prompt="@string/effect_prompt"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner1" />
+        android:id="@+id/effectsBar">
+        <Spinner
+            android:prompt="@string/effects_prompt"
+            android:layout_weight="0.333"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/effectSpinner" />
+        <Button
+            android:text="Apply"
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/applyButton" />
+    </LinearLayout>
 </LinearLayout>

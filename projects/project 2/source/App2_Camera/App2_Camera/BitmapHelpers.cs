@@ -102,7 +102,7 @@ namespace App2_Camera
                 {
                     int p = b.GetPixel(i, j);
                     Color c = new Color(p);
-                    c.R = 255 - c.R;
+                    c.R = (byte)(255 - c.R);
                     copyBitmap.SetPixel(i, j, c);
                 }
 
@@ -119,7 +119,7 @@ namespace App2_Camera
                 {
                     int p = b.GetPixel(i, j);
                     Color c = new Color(p);
-                    c.B = 255 - c.B;
+                    c.B = (byte)(255 - c.B);
                     copyBitmap.SetPixel(i, j, c);
                 }
 
@@ -136,8 +136,78 @@ namespace App2_Camera
                 {
                     int p = b.GetPixel(i, j);
                     Color c = new Color(p);
-                    c.G = 255 - c.G;
+                    c.G = (byte)(255 - c.G);
                     copyBitmap.SetPixel(i, j, c);
+                }
+
+            return copyBitmap;
+        }
+
+        // Grayscale by taking average of red, green, and blue values and applying
+        // that value to each of the colors
+        public static Bitmap Grayscale(Bitmap b)
+        {
+            Bitmap copyBitmap = b.Copy(Bitmap.Config.Argb8888, true);
+            for (int i = 0; i < b.Width; i++)
+                for (int j = 0; j < b.Height; j++)
+                {
+                    int p = b.GetPixel(i, j);
+                    Color c = new Color(p);
+                    int avg = (c.G + c.R + c.B) / 3;
+                    c.G = (byte)avg;
+                    copyBitmap.SetPixel(i, j, c);
+                }
+
+            return copyBitmap;
+        }
+
+        // Applies a high contrast effect by maxing values above half of 255 and
+        // flooring values below for each pixel
+        public static Bitmap HighContrast(Bitmap b)
+        {
+            Bitmap copyBitmap = b.Copy(Bitmap.Config.Argb8888, true);
+            for (int i = 0; i < b.Width; i++)
+                for (int j = 0; j < b.Height; j++)
+                {
+                    int p = b.GetPixel(i, j);
+                    Color c = new Color(p);
+
+                    c.R = (byte)((c.R > 255 / 2) ? 255 : 0);
+                    c.G = (byte)((c.G > 255 / 2) ? 255 : 0);
+                    c.B = (byte)((c.B > 255 / 2) ? 255 : 0);
+
+                    copyBitmap.SetPixel(i, j, c);
+                }
+
+            return copyBitmap;
+        }
+
+        // Adds Random noise to an image by randomly selecting a value between -10
+        // and 10 and applies that value to each of the red, green, and blue values
+        // of that pixel
+        public static Bitmap AddNoise(Bitmap b)
+        {
+            Bitmap copyBitmap = b.Copy(Bitmap.Config.Argb8888, true);
+            for (int i = 0; i < b.Width; i++)
+                for (int j = 0; j < b.Height; j++)
+                {
+                    int p = b.GetPixel(i, j);
+                    Color c = new Color(p);
+                    Random rand = new Random();
+                    int randVal = rand.Next(-10, 10);
+
+                    int[] colors = { c.R + randVal, c.G + randVal, c.B + randVal };
+                    for (int k = 0; k < 3; k++)
+                    {
+                        if (colors[k] > 255)
+                            colors[k] = 255;
+                        else if (colors[k] < 0)
+                            colors[k] = 0;
+                    }
+
+                    c.R = (byte)colors[0];
+                    c.G = (byte)colors[1];
+                    c.B = (byte)colors[2];
                 }
 
             return copyBitmap;

@@ -28,6 +28,22 @@ namespace App2_Camera
 		{
 		}
 		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int effects_array = 2131034112;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
+		}
+		
 		public partial class Attribute
 		{
 			
@@ -44,11 +60,20 @@ namespace App2_Camera
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int launchCameraButton = 2131034113;
+			// aapt resource value: 0x7f060003
+			public const int applyButton = 2131099651;
 			
-			// aapt resource value: 0x7f050000
-			public const int takenPictureImageView = 2131034112;
+			// aapt resource value: 0x7f060002
+			public const int effectSpinner = 2131099650;
+			
+			// aapt resource value: 0x7f060001
+			public const int effectsBar = 2131099649;
+			
+			// aapt resource value: 0x7f060004
+			public const int launchCameraButton = 2131099652;
+			
+			// aapt resource value: 0x7f060000
+			public const int takenPictureImageView = 2131099648;
 			
 			static Id()
 			{
@@ -100,6 +125,9 @@ namespace App2_Camera
 			
 			// aapt resource value: 0x7f040001
 			public const int app_name = 2130968577;
+			
+			// aapt resource value: 0x7f040002
+			public const int effects_prompt = 2130968578;
 			
 			// aapt resource value: 0x7f040000
 			public const int hello = 2130968576;

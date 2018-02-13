@@ -123,14 +123,14 @@ namespace App2_Camera
                     copyBitmap.SetPixel(i, j, c);
                 }
             }*/
-            Android.Graphics.Bitmap copyBitmap = BitmapHelpers.RemoveRed(bitmap);
+            /*Android.Graphics.Bitmap copyBitmap = BitmapHelpers.RemoveRed(bitmap);
             if (copyBitmap != null)
             {
                 imageView.SetImageBitmap(copyBitmap);
                 imageView.Visibility = Android.Views.ViewStates.Visible;
                 bitmap = null;
                 copyBitmap = null;
-            }
+            }*/
 
             // Dispose of the Java side bitmap.
             System.GC.Collect();
