@@ -2,7 +2,7 @@
 This is a simple application that can either take images from the camera or your device's gallery and then in a second view apply various effects to that image. It's purpose is mostly to meat the homework requirement and to learn. It's a fun little app to play around in.
 
 ## Requirements
-This was tested mostly on a galaxy tab and android 7+. It probably requires a bit of power as the effects are rather slow.
+This was tested mostly on a galaxy tab and android 7+. It probably requires a bit of power as the effects are rather slow. It requires use of your device's camera and access to write to it's storage.
 
 ## Usage
 The usage is fairly simple.
