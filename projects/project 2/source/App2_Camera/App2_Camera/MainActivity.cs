@@ -1,4 +1,6 @@
 ﻿// Marcellus Parley
+// 480 mobile apps - pa2
+// msp261
 // Most of this is based on CameraExample
 using Android.App;
 using Android.Widget;
@@ -35,6 +37,8 @@ namespace App2_Camera
                 CreateDirectoryForPictures();
                 FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
             }
+
+            FindViewById<Button>(Resource.Id.openGallaryButton).Click += OpenGallary;
         }
 
         /// <summary>
@@ -78,6 +82,14 @@ namespace App2_Camera
             StartActivityForResult(intent, 0);
         }
 
+        private void OpenGallary(object sender, System.EventArgs e)
+        {
+            var imageIntent = new Intent();
+            imageIntent.SetType("image/*");
+            imageIntent.SetAction(Intent.ActionGetContent);
+            StartActivityForResult(Intent.CreateChooser(imageIntent, "Select photo"), 1);
+        }
+
         // <summary>
         // Called automatically whenever an activity finishes
         // </summary>
@@ -89,22 +101,39 @@ namespace App2_Camera
             base.OnActivityResult(requestCode, resultCode, data);
 
             //Make image available in the gallery
-            /*
-            Intent mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
-            var contentUri = Android.Net.Uri.FromFile(_file);
-            mediaScanIntent.SetData(contentUri);
-            SendBroadcast(mediaScanIntent);
-            */
+            //if (requestCode == 0)
+            //{
+            //    Intent mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
+            //    var contentUri = Android.Net.Uri.FromFile(_file);
+            //    mediaScanIntent.SetData(contentUri);
+            //    SendBroadcast(mediaScanIntent);
+            //}
 
             // Display in ImageView. We will resize the bitmap to fit the display.
             // Loading the full sized image will consume too much memory
             // and cause the application to crash.
-            ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
-            int height = Resources.DisplayMetrics.HeightPixels;
-            int width = imageView.Height;
+
+            if (resultCode == Result.Ok)
+            {
+                Android.Graphics.Bitmap bm = null;
+                var editIntent = new Intent(this, typeof(EditActivity));
+                if (requestCode == 0)
+                {
+                    bm = (Android.Graphics.Bitmap)data.Extras.Get("data");
+                    editIntent.PutExtra("data", bm);
+                }
+                else
+                {
+                    editIntent.PutExtra("imageuri", data.Data);
+                }
+                editIntent.PutExtra("requestcode", requestCode);
+                
+                StartActivity(editIntent);
+            }
+            
 
             //AC: workaround for not passing actual files
-            Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
+            //Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
             //Android.Graphics.Bitmap copyBitmap =
             // bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
 
@@ -119,14 +148,14 @@ namespace App2_Camera
                     copyBitmap.SetPixel(i, j, c);
                 }
             }*/
-            Android.Graphics.Bitmap copyBitmap = BitmapHelpers.RemoveRed(bitmap);
+            /*Android.Graphics.Bitmap copyBitmap = BitmapHelpers.RemoveRed(bitmap);
             if (copyBitmap != null)
             {
                 imageView.SetImageBitmap(copyBitmap);
                 imageView.Visibility = Android.Views.ViewStates.Visible;
                 bitmap = null;
                 copyBitmap = null;
-            }
+            }*/
 
             // Dispose of the Java side bitmap.
             System.GC.Collect();
