@@ -45,7 +45,10 @@ namespace pa3_vision
 		{
 			
 			// aapt resource value: 0x7f040001
-			public const int launchCameraButton = 2130968577;
+			public const int GuessText = 2130968577;
+			
+			// aapt resource value: 0x7f040002
+			public const int launchCameraButton = 2130968578;
 			
 			// aapt resource value: 0x7f040000
 			public const int takenPictureImageView = 2130968576;

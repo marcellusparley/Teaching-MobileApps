@@ -63,6 +63,8 @@ namespace pa3_vision
                 StartActivity(GuessIntent);
             }
 
+            /*
+
             // Display in ImageView. We will resize the bitmap to fit the display.
             // Loading the full sized image will consume too much memory
             // and cause the application to crash.
@@ -125,7 +127,9 @@ namespace pa3_vision
                 imageView.SetImageBitmap(bitmap);
                 imageView.Visibility = Android.Views.ViewStates.Visible;
                 bitmap = null;
-            }
+            }*/
+
+            
 
             // Dispose of the Java side bitmap.
             System.GC.Collect();

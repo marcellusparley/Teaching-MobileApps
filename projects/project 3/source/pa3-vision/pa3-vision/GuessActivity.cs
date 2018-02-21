@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
+﻿using Android.App;
 using Android.Widget;
+using Android.OS;
+using Android.Content;
+using System.Collections.Generic;
+using Android.Content.PM;
+using Android.Provider;
 
 namespace pa3_vision
 {
@@ -22,6 +18,8 @@ namespace pa3_vision
             // Create your application here
             SetContentView(Resource.Layout.Guess);
 
+            TextView guess = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
+
             // Display in ImageView. We will resize the bitmap to fit the display.
             // Loading the full sized image will consume too much memory
             // and cause the application to crash.
@@ -30,7 +28,7 @@ namespace pa3_vision
             int width = imageView.Height;
 
             //AC: workaround for not passing actual files
-            Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)data.Extras.Get("data");
+            Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)Intent.Extras.Get("data");
 
             //convert bitmap into stream to be sent to Google API
             string bitmapString = "";
@@ -84,7 +82,11 @@ namespace pa3_vision
                 imageView.SetImageBitmap(bitmap);
                 imageView.Visibility = Android.Views.ViewStates.Visible;
                 bitmap = null;
+
+                string topResponse = apiResult.Responses[0].LabelAnnotation[0];
+                guess.text = "Is this a " + topResponse + "?";
             }
+            
 
             // Dispose of the Java side bitmap.
             System.GC.Collect();
