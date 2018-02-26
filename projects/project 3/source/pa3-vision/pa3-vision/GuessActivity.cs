@@ -1,4 +1,4 @@
-﻿using Android.App;
+using Android.App;
 using Android.Widget;
 using Android.OS;
 using Android.Content;
@@ -19,6 +19,11 @@ namespace pa3_vision
             SetContentView(Resource.Layout.Guess);
 
             TextView guess = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
+            Button correctButton = FindViewById<Button>(Resource.Id.guessCorrectButton);
+            Button incorrectButton = FindViewById<Button>(Resource.Id.guessIncorrectButton);
+            
+            correctButton.Click += Success;
+            incorrectButton.Click += Failure;
 
             // Display in ImageView. We will resize the bitmap to fit the display.
             // Loading the full sized image will consume too much memory
@@ -28,7 +33,10 @@ namespace pa3_vision
             int width = imageView.Height;
 
             //AC: workaround for not passing actual files
-            Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)Intent.Extras.Get("data");
+            //Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)Intent.Extras.Get("data");
+            
+            //load picture from file
+            Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
 
             //convert bitmap into stream to be sent to Google API
             string bitmapString = "";
@@ -51,9 +59,9 @@ namespace pa3_vision
             }
             cred = cred.CreateScoped(Google.Apis.Vision.v1.VisionService.Scope.CloudPlatform);
 
-            // By default, the library client will authenticate 
-            // using the service account file (created in the Google Developers 
-            // Console) specified by the GOOGLE_APPLICATION_CREDENTIALS 
+            // By default, the library client will authenticate
+            // using the service account file (created in the Google Developers
+            // Console) specified by the GOOGLE_APPLICATION_CREDENTIALS
             // environment variable. We are specifying our own credentials via json file.
             var client = new Google.Apis.Vision.v1.VisionService(new Google.Apis.Services.BaseClientService.Initializer()
             {
@@ -90,6 +98,20 @@ namespace pa3_vision
 
             // Dispose of the Java side bitmap.
             System.GC.Collect();
+        }
+        
+        private void Success(object sender, EventArgs e)
+        {
+            var SuccessIntent = new Intent(this, typeof(SuccessActivity));
+            StartActivity(SuccessIntent);
+        }
+        
+        private void Failure(object sender, EventArgs e)
+        {
+            var FailureIntent = new Intent(this, typeof(WrongActivity));
+            //send responses along with intent
+            FailureIntent.PutExtra("apiresult", apiResult);
+            StartActivity(FailureIntent);
         }
     }
 }
