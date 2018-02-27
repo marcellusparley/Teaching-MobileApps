@@ -5,12 +5,21 @@ using Android.Content;
 using System.Collections.Generic;
 using Android.Content.PM;
 using Android.Provider;
+using System;
+using System.Linq;
+using System.Text;
+using Android.Runtime;
+using Android.Views;
+using Android.Graphics.Drawables;
+using System.IO;
 
 namespace pa3_vision
 {
     [Activity(Label = "GuessActivity")]
     public class GuessActivity : Activity
     {
+        //private Google.Apis.Vision.v1.Data.BatchAnnotateImagesResponse _result;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -18,31 +27,31 @@ namespace pa3_vision
             // Create your application here
             SetContentView(Resource.Layout.Guess);
 
-            TextView guess = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
+            TextView guess = FindViewById<TextView>(Resource.Id.guessText);
             Button correctButton = FindViewById<Button>(Resource.Id.guessCorrectButton);
             Button incorrectButton = FindViewById<Button>(Resource.Id.guessIncorrectButton);
             
-            correctButton.Click += Success;
-            incorrectButton.Click += Failure;
+            correctButton.Click += GuessSuccess;
+            incorrectButton.Click += GuessFailure;
 
             // Display in ImageView. We will resize the bitmap to fit the display.
             // Loading the full sized image will consume too much memory
             // and cause the application to crash.
             ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
             int height = Resources.DisplayMetrics.HeightPixels;
-            int width = imageView.Height;
+            int width = Resources.DisplayMetrics.WidthPixels; // imageView.Height;
 
             //AC: workaround for not passing actual files
             //Android.Graphics.Bitmap bitmap = (Android.Graphics.Bitmap)Intent.Extras.Get("data");
             
             //load picture from file
-            Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
+            Android.Graphics.Bitmap bitmap = MainActivity._file.Path.LoadAndResizeBitmap(width, height);
 
             //convert bitmap into stream to be sent to Google API
             string bitmapString = "";
             using (var stream = new System.IO.MemoryStream())
             {
-                bitmap.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 0, stream);
+                bitmap.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 100, stream);
 
                 var bytes = stream.ToArray();
                 bitmapString = System.Convert.ToBase64String(bytes);
@@ -84,6 +93,7 @@ namespace pa3_vision
             //send request.  Note that I'm calling execute() here, but you might want to use
             //ExecuteAsync instead
             var apiResult = client.Images.Annotate(batch).Execute();
+            
 
             if (bitmap != null)
             {
@@ -91,8 +101,9 @@ namespace pa3_vision
                 imageView.Visibility = Android.Views.ViewStates.Visible;
                 bitmap = null;
 
-                string topResponse = apiResult.Responses[0].LabelAnnotation[0];
-                guess.text = "Is this a " + topResponse + "?";
+                string topResponse = apiResult.Responses[0].LabelAnnotations[0].Description;
+                guess.Text = "Is this a " + topResponse + "?";
+                //_result = apiResult;
             }
             
 
@@ -100,17 +111,17 @@ namespace pa3_vision
             System.GC.Collect();
         }
         
-        private void Success(object sender, EventArgs e)
+        private void GuessSuccess(object sender, EventArgs e)
         {
             var SuccessIntent = new Intent(this, typeof(SuccessActivity));
             StartActivity(SuccessIntent);
         }
         
-        private void Failure(object sender, EventArgs e)
+        private void GuessFailure(object sender, EventArgs e)
         {
             var FailureIntent = new Intent(this, typeof(WrongActivity));
             //send responses along with intent
-            FailureIntent.PutExtra("apiresult", apiResult);
+            //FailureIntent.PutExtra("apiresult", _result);
             StartActivity(FailureIntent);
         }
     }

@@ -85,11 +85,11 @@ namespace pa3_vision
 
             var GuessIntent = new Intent(this, typeof(GuessActivity));
 
-            if (resultCode == Result.Ok)
-            {
+            //if (resultCode == Result.Ok)
+            //{
                 //GuessIntent.PutExtra("data", (Android.Graphics.Bitmap)data.Extras.Get("data"));
                 StartActivity(GuessIntent);
-            }
+            //}
 
             // Dispose of the Java side bitmap.
             System.GC.Collect();

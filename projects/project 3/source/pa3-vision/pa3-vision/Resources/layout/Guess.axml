@@ -14,5 +14,21 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/GuessText" />
+        android:id="@+id/guessText" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+        <Button
+            android:text="Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/guessCorrectButton" />
+        <Button
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/guessIncorrectButton" />
+    </LinearLayout>
 </LinearLayout>

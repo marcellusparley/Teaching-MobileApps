@@ -44,11 +44,29 @@ namespace pa3_vision
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f040008
+			public const int backToGuessButton = 2130968584;
+			
+			// aapt resource value: 0x7f040003
+			public const int guessCorrectButton = 2130968579;
+			
+			// aapt resource value: 0x7f040004
+			public const int guessIncorrectButton = 2130968580;
+			
 			// aapt resource value: 0x7f040001
-			public const int GuessText = 2130968577;
+			public const int guessText = 2130968577;
+			
+			// aapt resource value: 0x7f040005
+			public const int launchCameraButton = 2130968581;
 			
 			// aapt resource value: 0x7f040002
-			public const int launchCameraButton = 2130968578;
+			public const int linearLayout1 = 2130968578;
+			
+			// aapt resource value: 0x7f040007
+			public const int returnToStartButton = 2130968583;
+			
+			// aapt resource value: 0x7f040006
+			public const int successText = 2130968582;
 			
 			// aapt resource value: 0x7f040000
 			public const int takenPictureImageView = 2130968576;
@@ -71,6 +89,9 @@ namespace pa3_vision
 			
 			// aapt resource value: 0x7f020001
 			public const int Main = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int Success = 2130837506;
 			
 			static Layout()
 			{

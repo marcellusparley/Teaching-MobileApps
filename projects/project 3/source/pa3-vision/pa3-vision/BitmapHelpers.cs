@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace GoogleApiExample
+namespace pa3_vision
 {
 
     public static class BitmapHelpers

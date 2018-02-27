@@ -24,8 +24,8 @@ namespace pa3_vision
             Button returnToStart = FindViewById<Button>(Resource.Id.returnToStartButton);
             Button backToGuess = FindViewById<Button>(Resource.Id.backToGuessButton);
             
-            returnToStart += ReturnStart;
-            backToGuess += GoBack;
+            returnToStart.Click += ReturnStart;
+            backToGuess.Click += GoBack;
         }
         
         private void GoBack(object sender, EventArgs e)
@@ -33,9 +33,9 @@ namespace pa3_vision
             Finish();
         }
         
-        private void returnToStart(object sender, EventArgs e)
+        private void ReturnStart(object sender, EventArgs e)
         {
-            
+            Finish();
         }
     }
 }
