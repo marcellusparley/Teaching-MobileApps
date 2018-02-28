@@ -1,30 +1,42 @@
+/* Marcellus Parley
+ * CS 480 - Mobile Apps
+ * Assignment 3 - Google Vision Api
+ * 02/27/2018
+ * */
+
+using System;
 using Android.App;
 using Android.Widget;
 using Android.OS;
 using Android.Content;
 using System.Collections.Generic;
-using Android.Content.PM;
-using Android.Provider;
-using System;
-using System.Linq;
-using System.Text;
-using Android.Runtime;
-using Android.Views;
-using Android.Graphics.Drawables;
-using System.IO;
+
+
+// This is the second screen/activity where in the App gives it's best guess for the image
+// and the user decides if it's correct or not. If so it goes to SuccessActivity if not
+// WrongActivity
 
 namespace pa3_vision
 {
     [Activity(Label = "GuessActivity")]
     public class GuessActivity : Activity
     {
-        //private Google.Apis.Vision.v1.Data.BatchAnnotateImagesResponse _result;
+        // I have the result be a class variable so I can access it during the button presses
+        private Google.Apis.Vision.v1.Data.BatchAnnotateImagesResponse _apiResult;
+
+        // The dictionary is public and static because I need to access it across activities and you
+        // cannot bundle dictionaries. I didn't want to bundle two separate arrays and attatch them
+        // across two intents/activits
+        public static Dictionary<string, float> resultDict = new Dictionary<string, float>();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            this.Title = "Hmm...";
 
-            // Create your application here
+            // Here I clear the dictionary so using the back button works to travers from later
+            // activities
+            resultDict.Clear();
             SetContentView(Resource.Layout.Guess);
 
             TextView guess = FindViewById<TextView>(Resource.Id.guessText);
@@ -92,7 +104,7 @@ namespace pa3_vision
 
             //send request.  Note that I'm calling execute() here, but you might want to use
             //ExecuteAsync instead
-            var apiResult = client.Images.Annotate(batch).Execute();
+            _apiResult = client.Images.Annotate(batch).Execute();
             
 
             if (bitmap != null)
@@ -101,9 +113,8 @@ namespace pa3_vision
                 imageView.Visibility = Android.Views.ViewStates.Visible;
                 bitmap = null;
 
-                string topResponse = apiResult.Responses[0].LabelAnnotations[0].Description;
+                string topResponse = _apiResult.Responses[0].LabelAnnotations[0].Description;
                 guess.Text = "Is this a " + topResponse + "?";
-                //_result = apiResult;
             }
             
 
@@ -120,8 +131,12 @@ namespace pa3_vision
         private void GuessFailure(object sender, EventArgs e)
         {
             var FailureIntent = new Intent(this, typeof(WrongActivity));
-            //send responses along with intent
-            //FailureIntent.PutExtra("apiresult", _result);
+            
+            foreach (var label in _apiResult.Responses[0].LabelAnnotations)
+            {
+                resultDict.Add(label.Description, (float)label.Score);
+            }
+
             StartActivity(FailureIntent);
         }
     }

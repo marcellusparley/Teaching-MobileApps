@@ -1,41 +1,40 @@
+/* Marcellus Parley
+ * CS 480 - Mobile Apps
+ * Assignment 3 - Google Vision Api
+ * 02/27/2018
+ * */
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
+
+// Simple page where app gloats at it's win. Offers a button to return to start.
 
 namespace pa3_vision
 {
-    [Activity(Label = "WrongActivity")]
+    [Activity(Label = "SuccessActivity")]
     public class SuccessActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            this.Title = "SUCCESS!";
 
             // Create your application here
             SetContentView(Resource.Layout.Success);
             
             Button returnToStart = FindViewById<Button>(Resource.Id.returnToStartButton);
-            Button backToGuess = FindViewById<Button>(Resource.Id.backToGuessButton);
             
             returnToStart.Click += ReturnStart;
-            backToGuess.Click += GoBack;
-        }
-        
-        private void GoBack(object sender, EventArgs e)
-        {
-            Finish();
         }
         
         private void ReturnStart(object sender, EventArgs e)
         {
-            Finish();
+            Intent toStart = new Intent(this, typeof(MainActivity));
+            toStart.SetFlags(ActivityFlags.ClearTop);
+            StartActivity(toStart);
         }
     }
 }

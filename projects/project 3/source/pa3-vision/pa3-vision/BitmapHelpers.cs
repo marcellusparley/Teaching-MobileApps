@@ -1,18 +1,25 @@
-using System;
+/* Marcellus Parley
+ * CS 480 - Mobile Apps
+ * Assignment 3 - Google Vision Api
+ * 02/27/2018
+ * */
+
+/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Android.App;
-using Android.Content;
+using Android.Content;*/
 using Android.Graphics;
-using Android.OS;
+/*using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using Android.Widget;
+using Android.Widget;*/
+
+// This is just the example code
 
 namespace pa3_vision
 {
-
     public static class BitmapHelpers
     {
         public static Bitmap LoadAndResizeBitmap(this string fileName, int width, int height)

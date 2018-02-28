@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:text="SUCCESS!"
+        android:text="HAHAHA! Looks like I have beaten you! Well don't feel bad, old chum, I get my insight from a giant, ubiquitous uber-corporation after all."
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,13 +12,8 @@
         android:textStyle="bold"
         android:textAlignment="center" />
     <Button
-        android:text="Return to Start"
+        android:text="Care to try again?"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/returnToStartButton" />
-    <Button
-        android:text="Whoops hit wrong button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/backToGuessButton" />
 </LinearLayout>

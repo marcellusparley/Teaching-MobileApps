@@ -1,3 +1,9 @@
+/* Marcellus Parley
+ * CS 480 - Mobile Apps
+ * Assignment 3 - Google Vision Api
+ * 02/27/2018
+ * */
+
 using Android.App;
 using Android.Widget;
 using Android.OS;
@@ -6,9 +12,12 @@ using System.Collections.Generic;
 using Android.Content.PM;
 using Android.Provider;
 
+// Most of this is taken straight from the example code I moved all the code 
+// dealing with the image into the GuessActivty
+
 namespace pa3_vision
 {
-    [Activity(Label = "pa3_vision", MainLauncher = true)]
+    [Activity(Label = "Beat Google Vision", MainLauncher = true)]
     public class MainActivity : Activity
     {
         //Used to track the file we're manipulating between functions
@@ -19,12 +28,14 @@ namespace pa3_vision
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            
             //see https://forums.xamarin.com/discussion/97273/launch-camera-activity-with-saving-file-in-external-storage-crashes-the-app
             //I'm not sure if doing the two lines below is a great idea, but it does seem to fix passing files around
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.SetVmPolicy(builder.Build());
             
             base.OnCreate(savedInstanceState);
+            this.Title = "Try to Stump Google Vision";
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
@@ -83,13 +94,9 @@ namespace pa3_vision
         {
             base.OnActivityResult(requestCode, resultCode, data);
 
+            //Creates intent to start GuessActivity with, and starts it
             var GuessIntent = new Intent(this, typeof(GuessActivity));
-
-            //if (resultCode == Result.Ok)
-            //{
-                //GuessIntent.PutExtra("data", (Android.Graphics.Bitmap)data.Extras.Get("data"));
-                StartActivity(GuessIntent);
-            //}
+            StartActivity(GuessIntent);
 
             // Dispose of the Java side bitmap.
             System.GC.Collect();
