@@ -9,7 +9,7 @@ This app requires use of the device's camera, internet and both reading and writ
 ## Usage
 Usage of this app is simple. Upon opening, you are greeted to the initial screen with a single button to open your camera (as seen below-left).
 
-![Image of initial screen](first.png | width=400) ![Image of the guess screen](guess.png)
+![Image of initial screen](first.png){:height="50%" width="50%"} ![Image of the guess screen](guess.png)
 
 After taking and selecting the image from the device's camera app you are taken to the second screen where the app will try to guess the content of the image (above-right). Selecting 'yes' here will send you to the success screen where the app will gloat about winning (as seen below-left). The "success" screen has a button that will return to the initial screen. Selecting 'no' at the guess will send you to the input screen (pictured below-right) In which the app asks what the content is. Here you must input text to continue.
 
