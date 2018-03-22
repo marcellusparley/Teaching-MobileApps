@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <LinearLayout
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent" 
+    >
+
+    <LinearLayout
+      android:orientation="vertical"
+      android:layout_height="wrap_content"
+      android:layout_width="fill_parent" 
+      android:layout_weight="0.5" >
+
+      <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" >
+
+        <TextView
+          android:text="R:"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <SeekBar
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:max="250"
+          android:id="@+id/seekBarRed" />
+        
+      </LinearLayout>
+
+      <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" >
+
+        <TextView
+          android:text="G:"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <SeekBar
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:max="250"
+          android:id="@+id/seekBarGreen" />
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" >
+
+        <TextView
+          android:text="B:"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <SeekBar
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:max="250"
+          android:id="@+id/seekBarBlue" />
+
+      </LinearLayout>
+
+      <Button
+        android:text="SET COLOR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonChangeColor"/>
+      
+    </LinearLayout>
+
+    <LinearLayout
+      android:orientation="vertical"
+      android:layout_height="wrap_content"
+      android:layout_width="fill_parent"
+      android:layout_weight="0.5" >
+      <TextView
+          android:text="STROKE WIDTH:"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:textAppearance="?android:attr/textAppearanceLarge" />
+      <EditText
+        android:inputType="numberDecimal"
+        android:text="2.0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextStroke" />
+      <Button
+        android:text="SET STROKE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonChangeStroke"/>
+      
+    </LinearLayout>
+    
+  </LinearLayout>
+
+  <Button
+        android:text="CLEAR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonDrawClear" />
+  
+    <Button
+        android:text="Identify with Google Vision"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonIdentify" />
+  
+    <pa3_vision.DrawingCanvasView
+        android:id="@+id/drawingCanvas"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" />
+
+
+</LinearLayout>
